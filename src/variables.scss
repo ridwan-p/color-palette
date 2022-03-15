@@ -1,0 +1,31 @@
+$color-black: #070c0d !default;
+$color-green: #304540 !default;
+$color-brown-1: #af916e !default;
+$color-brown-2: #c2bb96 !default;
+$color-brown-3: #e0e0c8 !default;
+$color-white: #fff !default;
+$color-red: #de8787 !default;
+
+$primary:       $color-brown-1 !default;
+// $secondary:     $gray-600 !default;
+// $success:       $green !default;
+// $info:          $cyan !default;
+// $warning:       $yellow !default;
+// $danger:        $red !default;
+// $light:         $gray-100 !default;
+// $dark:          $gray-900 !default;
+
+
+$themes: (
+  "black": $color-black,
+  "green": $color-green,
+  "brown-1": $color-brown-1,
+  "brown-2": $color-brown-2,
+  "brown-3": $color-brown-3,
+  "white": $color-white,
+  "red": $color-red,
+) !default;
+
+$border-radius: .5rem !default;
+
+$font-family-base: 'Quicksand', sans-serif !default;
