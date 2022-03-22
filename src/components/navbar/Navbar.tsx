@@ -10,7 +10,7 @@ export const Navbar: FC<Props> = () => {
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container">
         <a className="navbar-brand fw-bold" href="#">
-          <img src="/logo.svg" alt="" width="30" height="24" />
+          <img src="./logo.svg" alt="" width="30" height="24" />
           Logo
         </a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
