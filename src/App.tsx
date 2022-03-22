@@ -61,7 +61,7 @@ function App() {
         <div className="row">
           <div className="col-lg-8">
             <a className="fw-bold text-brown-3 navbar-brand d-flex align-items-center" href='#'>
-              <img src="/logo.svg" alt="" width="30" height="24" />
+              <img src="./logo.svg" alt="" width="30" height="24" />
               LOGO
             </a>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
