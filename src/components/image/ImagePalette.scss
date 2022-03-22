@@ -1,0 +1,15 @@
+.image-palette {
+  position: relative;
+  .palette {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    &-color {
+      opacity: .7;
+    }
+  }
+  & > img {
+    width: 100%;
+  }
+}

@@ -3,8 +3,13 @@
 .palette {
   display: flex;
   &-color {
-    flex: 1;
+    flex-grow: 1;
+    flex-basis: 1px;
     height: 6rem;
+    transition: all .1s ease-in-out;
+    position: relative;
+    color: $color-black;
+    cursor: pointer;
     &.first {
       border-top-left-radius: $border-radius;
       border-bottom-left-radius: $border-radius;
@@ -12,6 +17,24 @@
     &.last {
       border-top-right-radius: $border-radius;
       border-bottom-right-radius: $border-radius;
+    }
+    span {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all .1s ease-in-out;
+    }
+    &:hover {
+      flex: 1;
+      flex-basis: 80px;
+      opacity: 1 !important;
+      span {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
 }
