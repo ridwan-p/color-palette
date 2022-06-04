@@ -21,7 +21,7 @@ export const Navbar: FC<Props> = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/">Beranda</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/about">Tentang</NavLink>
