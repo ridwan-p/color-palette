@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { placeholder } from "assets"
 
-import "./FileUpload.scss"
+import styles from "./FileUpload.module.scss"
 import clsx from "clsx"
 
 type Props = {
@@ -51,12 +51,11 @@ export const FileUpload: React.FC<Props> = ({
     }
   }
 
-
   return (
     <div
       className={clsx(
-        'file-upload',
-        { 'active': isAcvite }
+        styles['file-upload'],
+        { [styles['active']]: isAcvite }
       )}
       onDrop={handleOnDrop}
       onDragLeave={handleOnDragLeave}
@@ -64,7 +63,7 @@ export const FileUpload: React.FC<Props> = ({
       onClick={handleOnClick}
       draggable="true"
     >
-      <div className="file-upload-container">
+      <div className={styles['file-upload-container']}>
         <input
           type="file"
           id='file-image-upload'
@@ -73,10 +72,10 @@ export const FileUpload: React.FC<Props> = ({
           onChange={handleOnChange}
           ref={inputRef}
         />
-        <img src={placeholder} width='46' height='54' className="file-upload-placeholder" alt="placeholder" />
-        <div className="file-upload-content">
-          <div className="file-upload-title">Letakkan gambar anda disini</div>
-          <div className="file-upload-support">Mendukung : JPG, JPEG, PNG</div>
+        <img src={placeholder} width='46' height='54' className={styles['file-upload-placeholder']} alt="placeholder" />
+        <div className={styles['file-upload-content']}>
+          <div className={styles['file-upload-title']}>Letakkan gambar anda disini</div>
+          <div className={styles['file-upload-support']}>Mendukung : JPG, JPEG, PNG</div>
         </div>
       </div>
     </div>

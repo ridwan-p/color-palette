@@ -1,6 +1,10 @@
-import { FileUpload, Navbar } from "components"
+import {
+  FileUpload,
+  Navbar,
+  ProgressBar
+} from "components"
 
-import "./Home.scss"
+import styles from "./Home.module.scss"
 
 export const Home = () => {
   return (
@@ -16,8 +20,9 @@ export const Home = () => {
 const EmptyValue = () => {
 
   return (
-    <div className="empty-value">
+    <div className={styles['empty-value']}>
       <FileUpload onChange={(file) => { console.log('file', file) }} />
+      <ProgressBar />
     </div>
   )
 }

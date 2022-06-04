@@ -1,0 +1,31 @@
+@import "styles/variables.scss";
+
+.progressbar {
+    background-color: $white;
+    padding: 18px 32px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    min-width: 667px;
+    gap: 30px;
+    &-container {
+        flex: 1;
+    }
+    &-title {
+        font-weight: bold;
+        color: $blue-900;
+    }
+    &-label-status {
+        color: #C1C7DB;
+        font-size: 12px;
+    }
+    &-item {
+        background-color: $gray-200;
+        height: 3px;
+        width: 100%;
+        &-process {
+            height: 100%;
+            background-color: $blue-600;
+        }
+    }
+}

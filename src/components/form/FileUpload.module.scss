@@ -5,6 +5,8 @@
     padding: 24px;
     background-color: $white;
     width: fit-content;
+    min-width: 667px;
+
     &-container {
         border: 2px dashed $blue-200;
         border-radius: 16px;
