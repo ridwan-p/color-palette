@@ -1,4 +1,4 @@
-import { logo } from 'assets'
+import { ic_language, logo } from 'assets'
 import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import "./Navbar.scss"
@@ -25,6 +25,9 @@ export const Navbar: FC<Props> = () => {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/about">Tentang</NavLink>
+            </li>
+            <li className="nav-item">
+              <button className='btn btn-link nav-link'> <img src={ic_language} alt="language" height={18} width={16} /> ID</button>
             </li>
           </ul>
         </div>
