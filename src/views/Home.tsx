@@ -1,5 +1,4 @@
-import './App.css';
-import { CardPalette, ImageUpload, Navbar } from './components';
+import { CardPalette, ImageUpload, Navbar } from '../components';
 
 const colors = [
   ['#DAB88B', '#F3E9DD', '#FDF6EC', '#B7CADB'],
@@ -16,8 +15,8 @@ const colors = [
   ['#DAB88B', '#F3E9DD', '#FDF6EC', '#B7CADB'],
 ]
 
-function App() {
-
+export const Home = () => {
+  console.log('home')
   return <>
     <div className="bg-black text-brown-2">
       <Navbar />
@@ -95,5 +94,3 @@ function App() {
 
   </>
 }
-
-export default App;

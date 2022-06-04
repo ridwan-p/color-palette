@@ -1,0 +1,28 @@
+// indikasi menggunakan --demo-primary, --demo-success, --demo-*
+.btn-demo {
+  &.btn-primary {
+    color: #000;
+    background-color: var(--demo-primary);
+    border-color: var(--demo-primary);
+  }
+  &.btn-success {
+    color: #000;
+    background-color: var(--demo-success);
+    border-color: var(--demo-success);
+  }
+  &.btn-info {
+    color: #000;
+    background-color: var(--demo-info);
+    border-color: var(--demo-info);
+  }
+  &.btn-warning {
+    color: #000;
+    background-color: var(--demo-warning);
+    border-color: var(--demo-warning);
+  }
+  &.btn-danger {
+    color: #000;
+    background-color: var(--demo-danger);
+    border-color: var(--demo-danger);
+  }
+}
