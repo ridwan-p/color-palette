@@ -1,45 +1,46 @@
-$color-black: #070c0d !default;
-$color-green: #304540 !default;
-$color-brown-1: #af916e !default;
-$color-brown-2: #c2bb96 !default;
-$color-brown-3: #e0e0c8 !default;
-$color-white: #fff !default;
-$color-red: #de8787 !default;
 
-$primary:       $color-brown-1 !default;
+
+$black: #070c0d !default;
+$white: #fff !default;
+
+$gray-900: #434343 !default;
+
+$blue-100: #F5F9FF !default;
+$blue-200: #C1C7DB !default;
+$blue-300: #C9D5FF !default;
+$blue-600: #5C78DB !default;
+$blue-900: #4D5B8D !default;
+
+$primary:       $blue-900 !default;
 // $secondary:     $gray-600 !default;
-$success:       $color-green !default;
+// $success:       $color-green !default;
 // $info:          $cyan !default;
 // $warning:       $yellow !default;
-$danger:        $color-red !default;
+// $danger:        $color-red !default;
 // $light:         $gray-100 !default;
 // $dark:          $gray-900 !default;
 
 
 $themes: (
-  "black": $color-black,
-  "green": $color-green,
-  "brown-1": $color-brown-1,
-  "brown-2": $color-brown-2,
-  "brown-3": $color-brown-3,
-  "white": $color-white,
-  "red": $color-red,
+  "black": $black,
+  "white": $white,
+  "primary": $primary,
 ) !default;
 
-$border-radius: .5rem !default;
+// Body
+//
+// Settings for the `<body>` element.
+$body-bg:                   #F5F9FF !default;
+$body-color:                $blue-900 !default;
 
-$font-family-base: 'Quicksand', sans-serif !default;
-$font-weight-light:           300 !default;
-$font-weight-normal:          500 !default;
-$font-weight-bold:            700 !default;
-$font-weight-bolder:          bolder !default;
+$border-radius: 16px !default;
 
-$headings-font-weight:        $font-weight-bold !default;
+$font-family-base: 'Poppins', sans-serif !default;
 
-$nav-link-color:              $color-brown-3 !default;
-$nav-link-hover-color:        $color-white !default;
-$nav-tabs-link-active-color:  $color-brown-1 !default;
-$nav-link-font-weight:        $font-weight-normal !default;
+$nav-link-color:              $blue-600 !default;
+$nav-link-hover-color:        $blue-900 !default;
+$nav-tabs-link-active-color:  $blue-900 !default;
 
-$navbar-dark-hover-color:     $color-white  !default;
-$navbar-dark-active-color:    $color-brown-3 !default;
+$navbar-light-color:                $blue-600  !default;
+$navbar-light-hover-color:          $blue-900  !default;
+$navbar-light-active-color:         $blue-600  !default;

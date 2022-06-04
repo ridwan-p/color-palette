@@ -2,10 +2,11 @@ import clsx from "clsx"
 import React from "react"
 
 type Props = {
-  className?:string
+  className?: string
+  children?: any
 }
 
-export const Button:React.FC<Props> = ({
+export const Button: React.FC<Props> = ({
   children,
   className
 }) => {

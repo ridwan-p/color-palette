@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+.navbar {
+    &-brand {
+        font-size: 18px;
+        font-weight: 500;
+        color: $blue-600 !important;
+    }
+}
+.nav-link {
+    &.active {
+        font-weight: bold;
+    }
+}

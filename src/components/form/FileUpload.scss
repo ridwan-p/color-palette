@@ -1,0 +1,40 @@
+@import "../../styles/variables.scss";
+
+.file-upload {
+    border-radius: 16px;
+    padding: 24px;
+    background-color: $white;
+    width: fit-content;
+    &-container {
+        border: 2px dashed $blue-200;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 42px 98px;
+        gap: 33px;
+        pointer-events: none;
+    }
+    
+    &.active &-container {
+        background-color: $blue-100;
+        border-color: $blue-300;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+    }
+    &-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: $primary;
+    }
+    &-support {
+        color: $gray-900;
+    }
+}
