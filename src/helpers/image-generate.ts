@@ -9,7 +9,6 @@ export const getPixel = (imageData: ImageData, x: number, y: number) => getRGB(i
 
 export const convertImageRGB = (imageData: ImageData) => {
   const rgba = []
-  let i = 0
   const length = imageData.data.length / 4
   for (let i = 0; i < length; i++) {
     rgba.push(getRGB(imageData, i))
@@ -25,9 +24,9 @@ type RGBA = {
   // a: number
 }
 export const rgba2hex = ({ r, g, b }: RGBA): string => {
-  return '#' + (r | 1 << 8).toString(16).slice(1) +
-    (g | 1 << 8).toString(16).slice(1) +
-    (b | 1 << 8).toString(16).slice(1)
+  return '#' + (r).toString(16) +
+    (g).toString(16) +
+    (b).toString(16)
   // + ((a * 255) | 1 << 8).toString(16).slice(1)
 }
 
