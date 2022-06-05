@@ -60,14 +60,12 @@ export class Kmeans {
     return res
   }
 
-  public async run(params?: Calcuate): Promise<Vector[]> {
+  public run(params?: Calcuate): Promise<Vector[]> {
     this.progress = 0
-    return new Promise<Vector[]>((resolve) => {
-      resolve(this.calculate(params))
-    })
+    return this.calculate(params)
   }
 
-  protected calculate(params?: Calcuate): Vector[] {
+  protected calculate(params?: Calcuate): Promise<Vector[]> {
 
     // progress calculation 
     if (params?.onProgress) params.onProgress(this.progress++)
@@ -107,13 +105,18 @@ export class Kmeans {
     // }
     if (this.isEqual(this.cluster, newCluster)) {
       this.progress = 100
-      return vecArr
+      return new Promise((resolve) => {
+        resolve(vecArr)
+      })
     }
 
     this.cluster = newCluster
     this.centroids = vecArr
-
-    return this.calculate(params)
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.calculate(params))
+      })
+    })
   }
 
   protected isEqual(oldCluster: Vector[], newCluster: Vector[]): boolean {

@@ -1,4 +1,5 @@
 import { ic_check, ic_close } from "assets"
+import { minuteAndSecond } from "helpers/time"
 import { useEffect, useState } from "react"
 import styles from "./ProgressBar.module.scss"
 
@@ -9,12 +10,13 @@ export enum Status {
 }
 
 type Props = {
-  status: Status
+  status: Status,
+  onFinish(): void
 }
 
 export const ProgressBar: React.FC<Props> = ({
-  status
-}) => {
+  status,
+  onFinish }) => {
 
   const [percent, setPercent] = useState(0)
 
@@ -25,8 +27,12 @@ export const ProgressBar: React.FC<Props> = ({
       }, 100)
     }
 
-    if (status === Status.Finish) setPercent(100)
+    if (status === Status.Finish) {
+      setPercent(100)
+      onFinish()
+    }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, percent])
 
   return (
@@ -50,21 +56,23 @@ const ProgressBarComplate = () => {
 type PropsStart = {
   percent: number
 }
+
 const ProgressBarStart: React.FC<PropsStart> = ({
   percent
 }) => {
+  const second = Math.floor(120 / 100 * (100 - percent))
   return (
     <>
       <div className={styles['progressbar-container']}>
-        <div className={styles['progressbar-title']}>Mengunggah ...</div>
+        <div className={styles['progressbar-title']}>Prosess ...</div>
         <div className={styles['progressbar-status']}>
-          <div className={styles['progressbar-label-status']}>{percent}% . {Math.floor(120 / 100 * (100 - percent))} detik tersisa</div>
+          <div className={styles['progressbar-label-status']}>{percent}% . {minuteAndSecond(second)} menit tersisa</div>
           <div className={styles['progressbar-item']}>
             <div className={styles['progressbar-item-process']} style={{ width: `${percent}%` }}></div>
           </div>
         </div>
       </div>
-      <img src={ic_close} width={32} height={32} alt="close" className={styles['progressbar-icon']} />
+      {/* <img src={ic_close} width={32} height={32} alt="close" className={styles['progressbar-icon']} /> */}
     </>
   )
 }

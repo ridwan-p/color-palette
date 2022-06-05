@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { ic_upload } from "assets"
-import clsx from "clsx"
 import {
   ButtonIcon,
   FileUpload,
@@ -15,13 +14,10 @@ import { ImageItems, PaletteItems } from "models/PaletteModel"
 
 import styles from "./Home.module.scss"
 
-
-
 export const Home = () => {
   const [status, setStatus] = useState(ProgressStatus.Idle)
   const [imagesSrc, setImagesSrc] = useState<ImageItems>([])
   const [palettes, setPalettes] = useState<PaletteItems>([])
-
 
   const handleOnUpload = (file: File) => {
     setStatus(ProgressStatus.Loading)
@@ -59,18 +55,28 @@ export const Home = () => {
     setImagesSrc([...imagesSrc])
   }
 
+  const handleOnFinishProcess = () => {
+    setTimeout(() => {
+      setStatus(ProgressStatus.Idle)
+    }, 1000)
+  }
+
   const calculate = async (src: string): Promise<Vector[]> => {
     const img = await loadImage(src)
     const rgba = convertImageRGB(img)
     // kmeans init 
     const kmeans = new Kmeans(rgba, 6)
     // kmeans calculate 
-    return await kmeans.run()
+    return kmeans.run()
   }
 
   if (palettes.length <= 0 && imagesSrc.length <= 0) {
     return (
-      <EmptyValue onUpload={handleOnUpload} status={status} />
+      <EmptyValue
+        onUpload={handleOnUpload}
+        status={status}
+        onFinishProcess={handleOnFinishProcess}
+      />
     )
   }
 
@@ -82,25 +88,35 @@ export const Home = () => {
       onChange={handleChange}
       onRemove={handleRemove}
       onUpload={handleOnUpload}
+      onFinishProcess={handleOnFinishProcess}
     />
   )
 
 }
 
 type PropsEmpty = {
-  onUpload(file: File): void,
+  onUpload(file: File): void
   status: ProgressStatus
+  onFinishProcess(): void
 }
 
 const EmptyValue: React.FC<PropsEmpty> = ({
   onUpload,
+  onFinishProcess,
   status
 }) => {
 
   return (
     <div className={styles['empty-value']}>
       <FileUpload onChange={onUpload} />
-      {status !== ProgressStatus.Idle && <ProgressBar status={status} />}
+      {
+        status !== ProgressStatus.Idle && (
+          <ProgressBar
+            status={status}
+            onFinish={onFinishProcess}
+          />
+        )
+      }
     </div>
   )
 }
@@ -111,6 +127,7 @@ type PropsItems = {
   status: ProgressStatus
   onRemove(key: number): void
   onChange(key: number, file: File): void
+  onFinishProcess(): void
   onUpload(file: File): void
 }
 
@@ -120,7 +137,8 @@ const ItemsPalette: React.FC<PropsItems> = ({
   status,
   onRemove,
   onChange,
-  onUpload
+  onUpload,
+  onFinishProcess
 }) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -152,7 +170,14 @@ const ItemsPalette: React.FC<PropsItems> = ({
             />
           ))
         }
-        {status !== ProgressStatus.Idle && <ProgressBar status={status} />}
+        {
+          status !== ProgressStatus.Idle && (
+            <ProgressBar
+              status={status}
+              onFinish={onFinishProcess}
+            />
+          )
+        }
       </div>
 
       <ButtonIcon
