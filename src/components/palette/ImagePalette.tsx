@@ -1,15 +1,17 @@
 import { Palette } from "./Palette"
 import styles from './ImagePalette.module.scss'
 import clsx from "clsx"
+import { PaletteItem } from "models/PaletteModel"
 
 type Props = {
-  src: string
+  src: string,
+  colors: PaletteItem
 }
 
 export const ImagePalette: React.FC<Props> = ({
-  src
+  src,
+  colors
 }) => {
-  const colors = ['#5A6E71', '#8A928D', '#C1B79E', '#5EA2DE', '#A1C6DE', '#EAEBDF']
   return (
     <div className={clsx(
       styles['image-palette'],

@@ -1,10 +1,10 @@
 .btn-icon {
-    display: flex;
+    display: flex !important;
     gap: 8px;
-    padding: 16px;
+    padding: 16px !important;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 8px !important;
     &-content {
         font-weight: bold;
     }

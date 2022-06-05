@@ -1,10 +1,11 @@
 import clsx from 'clsx'
+import { PaletteItem } from 'models/PaletteModel'
 import React from 'react'
 import { invertColor } from '../../helpers/colors'
 import styles from './Palette.module.scss'
 
 type Props = {
-  colors: string[]
+  colors: PaletteItem
   className?: string
   isRounded?: boolean
 }

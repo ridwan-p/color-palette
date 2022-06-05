@@ -20,9 +20,9 @@ export const ButtonIcon: React.FC<Props> = ({
     return (
         <button
             className={clsx(
+                sytles['btn-icon'],
                 'btn',
                 className,
-                sytles['btn-icon']
             )}
             onClick={onClick}
             style={style}
