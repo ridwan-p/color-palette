@@ -49,7 +49,7 @@ const ColorCode: React.FC<PropsColorCode> = ({
 }) => {
   return (
     <div className={styles['color-code']}>
-      <div className={styles['color-code-comment']}>{`/* Color Name: ${name} */`}</div>
+      <div className={styles['color-code-comment']} style={{ display: "none" }}>{`Color Name: ${name} `}</div>
       <div className={styles['color-code-css']}>
         <span>background-color : </span>
         <span className={styles['color-code-box']} style={{ backgroundColor: color }}></span>
