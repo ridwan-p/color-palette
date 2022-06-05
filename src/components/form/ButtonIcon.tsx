@@ -5,7 +5,7 @@ import sytles from "./ButtonIcon.module.scss"
 type Props = {
     className?: string
     iconPre?: string
-    children: string
+    children: React.ReactNode
     onClick(e?: React.MouseEvent<HTMLButtonElement, MouseEvent>): void
     style?: Object
 }
