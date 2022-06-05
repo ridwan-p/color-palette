@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 export const getRGB = (imageData: ImageData, index: number) => {
   const i = index * 4
   const d = imageData.data
@@ -24,10 +25,10 @@ type RGBA = {
   // a: number
 }
 export const rgba2hex = ({ r, g, b }: RGBA): string => {
-  return '#' + (r).toString(16) +
-    (g).toString(16) +
-    (b).toString(16)
-  // + ((a * 255) | 1 << 8).toString(16).slice(1)
+  const red = (r | 1 << 8).toString(16).slice(1)
+  const green = (g | 1 << 8).toString(16).slice(1)
+  const blue = (b | 1 << 8).toString(16).slice(1)
+  return '#' + red + green + blue
 }
 
 export async function loadImage(url: string, resize: number = 700) {
