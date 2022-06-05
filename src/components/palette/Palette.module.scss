@@ -28,5 +28,8 @@
         opacity: 1;
       }
     }
+    &:active {
+      transform: scale(.8);
+    }
   }
 }
