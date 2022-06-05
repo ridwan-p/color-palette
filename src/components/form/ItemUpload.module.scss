@@ -1,0 +1,23 @@
+@import "styles/variables.scss";
+
+.item-upload {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $white;
+    padding: 18px 32px;
+    border-radius: 18px;
+    &-content {
+        flex: 1;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    &-filename {
+        font-weight: bold;
+    }
+    &-action {
+        display: flex;
+        gap: 8px;
+    }
+}

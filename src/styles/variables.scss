@@ -15,7 +15,7 @@ $blue-900: #4D5B8D !default;
 $primary:       $blue-900 !default;
 // $secondary:     $gray-600 !default;
 // $success:       $color-green !default;
-// $info:          $cyan !default;
+$info:          $blue-600 !default;
 // $warning:       $yellow !default;
 // $danger:        $color-red !default;
 // $light:         $gray-100 !default;
@@ -26,6 +26,7 @@ $themes: (
   "black": $black,
   "white": $white,
   "primary": $primary,
+  "info": $info,
 ) !default;
 
 // Body
