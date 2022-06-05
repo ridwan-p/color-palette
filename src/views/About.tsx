@@ -1,6 +1,4 @@
 import { illustration } from "assets"
-import clsx from "clsx"
-import { Footer, Navbar } from "components"
 
 export const About = () => {
   return (
