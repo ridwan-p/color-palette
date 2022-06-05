@@ -39,4 +39,25 @@
     &-support {
         color: $gray-900;
     }
+
+    // Small devices (landscape phones, less than 768px)
+    @media (max-width: 767.98px) { 
+        & {
+            min-width: 100%;
+            padding: 8px;
+            width: 100%;
+            &-container {
+                padding: 16px;
+                gap: 16px;
+                text-align: center;
+            }
+            &-title {
+                font-size: 18px;
+            }
+            &-support {
+                font-size: 12px;
+            }
+        }
+     }
 }
+
