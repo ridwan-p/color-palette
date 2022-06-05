@@ -10,14 +10,6 @@
     position: relative;
     color: $black;
     cursor: pointer;
-    &.first {
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
-    }
-    &.last {
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
     span {
       visibility: hidden;
       opacity: 0;

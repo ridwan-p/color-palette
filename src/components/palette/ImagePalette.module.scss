@@ -1,0 +1,35 @@
+@import '../../styles/variables.scss';
+
+.image-palette {
+    &-items {
+        margin-bottom: 32px;
+    }
+    &-code {
+        background-color: $white;
+        padding: 16px;
+        border-radius: 16px;
+    }
+}
+
+.color-code {
+    font-style: italic;
+    &-comment {
+        color: #000;
+    }
+    &-css {
+        color: #5A6E71;
+    }
+    &-value {
+        color: #FB7272;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    &-box {
+        width: 18px;
+        height: 18px;
+        background-color: #FFF;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 4px;
+    }
+}
