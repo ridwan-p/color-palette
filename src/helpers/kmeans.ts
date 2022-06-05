@@ -1,4 +1,4 @@
-type Vector = number[]
+export type Vector = number[]
 
 type Calcuate = {
   onProgress?(progress: number): void,

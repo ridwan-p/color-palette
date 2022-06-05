@@ -10,7 +10,7 @@ import {
   Status as ProgressStatus
 } from "components"
 import { convertImageRGB, loadImage, rgba2hex } from "helpers/image-generate"
-import { Kmeans } from "helpers/kmeans"
+import { Kmeans, Vector } from "helpers/kmeans"
 import { ImageItems, PaletteItems } from "models/PaletteModel"
 
 import styles from "./Home.module.scss"
@@ -25,24 +25,47 @@ export const Home = () => {
 
   const handleOnUpload = (file: File) => {
     setStatus(ProgressStatus.Loading)
-    calculate(file)
+    const src = URL.createObjectURL(file)
+
+    calculate(src).then((data: Vector[]) => {
+      const colors = data.map((item) => rgba2hex({ r: item[0], g: item[1], b: item[2] }))
+      palettes.push(colors)
+      setPalettes(palettes)
+      imagesSrc.push({ src, filename: file.name })
+      setImagesSrc(imagesSrc)
+      setStatus(ProgressStatus.Finish)
+    })
   }
 
-  const calculate = async (file: File) => {
+  const handleChange = (key: number, file: File) => {
+    setStatus(ProgressStatus.Loading)
     const src = URL.createObjectURL(file)
+
+    calculate(src).then((data: Vector[]) => {
+      palettes[key] = data.map((item) => rgba2hex({ r: item[0], g: item[1], b: item[2] }))
+      setPalettes(palettes)
+
+      imagesSrc[key] = { src, filename: file.name }
+      setImagesSrc(imagesSrc)
+
+      setStatus(ProgressStatus.Finish)
+    })
+  }
+
+  const handleRemove = (key: number) => {
+    imagesSrc.splice(key, 1)
+    palettes.splice(key, 1)
+    setPalettes([...palettes])
+    setImagesSrc([...imagesSrc])
+  }
+
+  const calculate = async (src: string): Promise<Vector[]> => {
     const img = await loadImage(src)
     const rgba = convertImageRGB(img)
-    // kmeans calculate 
+    // kmeans init 
     const kmeans = new Kmeans(rgba, 6)
-    const calculate = await kmeans.run()
-    // finish 
-
-    const colors = calculate.map((item) => rgba2hex({ r: item[0], g: item[1], b: item[2] }))
-    palettes.push(colors)
-    setPalettes(palettes)
-    imagesSrc.push({ src, filename: file.name })
-    setImagesSrc(imagesSrc)
-    setStatus(ProgressStatus.Finish)
+    // kmeans calculate 
+    return await kmeans.run()
   }
 
   if (palettes.length <= 0 && imagesSrc.length <= 0) {
@@ -56,6 +79,8 @@ export const Home = () => {
       status={status}
       palettes={palettes}
       imagesSrc={imagesSrc}
+      onChange={handleChange}
+      onRemove={handleRemove}
       onUpload={handleOnUpload}
     />
   )
@@ -84,6 +109,8 @@ type PropsItems = {
   palettes: PaletteItems,
   imagesSrc: ImageItems
   status: ProgressStatus
+  onRemove(key: number): void
+  onChange(key: number, file: File): void
   onUpload(file: File): void
 }
 
@@ -91,6 +118,8 @@ const ItemsPalette: React.FC<PropsItems> = ({
   palettes,
   imagesSrc,
   status,
+  onRemove,
+  onChange,
   onUpload
 }) => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -118,8 +147,8 @@ const ItemsPalette: React.FC<PropsItems> = ({
             <ItemUpload
               key={key}
               filename={item.filename}
-              onChange={(file) => { console.log('file', file) }}
-              onRemove={() => { console.log('remove file') }}
+              onChange={(file) => { onChange(key, file) }}
+              onRemove={() => { onRemove(key) }}
             />
           ))
         }

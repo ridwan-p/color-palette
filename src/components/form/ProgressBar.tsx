@@ -19,8 +19,6 @@ export const ProgressBar: React.FC<Props> = ({
   const [percent, setPercent] = useState(0)
 
   useEffect(() => {
-    console.log('status', status)
-    console.log('percent', percent)
     if (status === Status.Loading && percent < 99) {
       setTimeout(() => {
         setPercent(percent + 1)
