@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ic_upload } from "assets"
 import {
   ButtonIcon,
@@ -9,42 +9,64 @@ import {
   Status as ProgressStatus
 } from "components"
 import { convertImageRGB, loadImage, rgba2hex } from "helpers/image-generate"
-import { Kmeans, Vector } from "helpers/kmeans"
+import { Kmeans } from "helpers/kmeans"
+import { Vector } from "models/KmeansModel"
 import { ImageItems, PaletteItems } from "models/PaletteModel"
 
 import styles from "./Home.module.scss"
+import app from "config/app"
 
 export const Home = () => {
   const [status, setStatus] = useState(ProgressStatus.Idle)
   const [imagesSrc, setImagesSrc] = useState<ImageItems>([])
   const [palettes, setPalettes] = useState<PaletteItems>([])
 
-  const handleOnUpload = (file: File) => {
+  useEffect(() => {
+    const dataLocal = localStorage.getItem(app.palettes)
+    if (dataLocal) {
+      const data = JSON.parse(dataLocal)
+      setImagesSrc(data?.imagesSrc)
+      setPalettes(data?.palettes)
+    }
+  }, [])
+
+  const saveLocalStorage = (imagesSrc: ImageItems, palettes: PaletteItems) => {
+    const data = { imagesSrc, palettes }
+    localStorage.setItem(app.palettes, JSON.stringify(data))
+  }
+
+  const handleOnUpload = async (file: File) => {
     setStatus(ProgressStatus.Loading)
     const src = URL.createObjectURL(file)
-
-    calculate(src).then((data: Vector[]) => {
+    const { data, base64 } = await loadImage(src, 500)
+    kmeansCalcuation(data).then((data: Vector[]) => {
       const colors = data.map((item) => rgba2hex({ r: item[0], g: item[1], b: item[2] }))
       palettes.push(colors)
       setPalettes(palettes)
-      imagesSrc.push({ src, filename: file.name })
+      imagesSrc.push({ src: base64, filename: file.name })
       setImagesSrc(imagesSrc)
       setStatus(ProgressStatus.Finish)
+      // save to localStorage
+      saveLocalStorage(imagesSrc, palettes)
     })
+
   }
 
-  const handleChange = (key: number, file: File) => {
+  const handleChange = async (key: number, file: File) => {
     setStatus(ProgressStatus.Loading)
     const src = URL.createObjectURL(file)
+    const { data, base64 } = await loadImage(src, 500)
 
-    calculate(src).then((data: Vector[]) => {
+    kmeansCalcuation(data).then((data: Vector[]) => {
       palettes[key] = data.map((item) => rgba2hex({ r: item[0], g: item[1], b: item[2] }))
       setPalettes(palettes)
 
-      imagesSrc[key] = { src, filename: file.name }
+      imagesSrc[key] = { src: base64, filename: file.name }
       setImagesSrc(imagesSrc)
 
       setStatus(ProgressStatus.Finish)
+      // save to localStorage
+      saveLocalStorage(imagesSrc, palettes)
     })
   }
 
@@ -53,17 +75,19 @@ export const Home = () => {
     palettes.splice(key, 1)
     setPalettes([...palettes])
     setImagesSrc([...imagesSrc])
+
+    // save to localStorage
+    saveLocalStorage(imagesSrc, palettes)
   }
 
   const handleOnFinishProcess = () => {
     setTimeout(() => {
       setStatus(ProgressStatus.Idle)
-    }, 1000)
+    }, 1200)
   }
 
-  const calculate = async (src: string): Promise<Vector[]> => {
-    const img = await loadImage(src)
-    const rgba = convertImageRGB(img)
+  const kmeansCalcuation = async (src: ImageData): Promise<Vector[]> => {
+    const rgba = convertImageRGB(src)
     // kmeans init 
     const kmeans = new Kmeans(rgba, 6)
     // kmeans calculate 

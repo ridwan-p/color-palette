@@ -1,3 +1,5 @@
+import { ImageGenerator } from "models/ImageModel"
+
 /* eslint-disable no-mixed-operators */
 export const getRGB = (imageData: ImageData, index: number) => {
   const i = index * 4
@@ -33,7 +35,7 @@ export const rgba2hex = ({ r, g, b }: RGBA): string => {
 
 export async function loadImage(url: string, resize: number = 700) {
   const image = new Image()
-  return new Promise<ImageData>((resolve, reject) => {
+  return new Promise<ImageGenerator>((resolve, reject) => {
     image.onload = () => {
       const cvs = document.createElement('canvas')
       const ctx = cvs.getContext("2d") as CanvasRenderingContext2D
@@ -42,7 +44,8 @@ export async function loadImage(url: string, resize: number = 700) {
       cvs.height = image.height * scala
       ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, cvs.width, cvs.height)
       const data = ctx.getImageData(0, 0, cvs.width, cvs.height)
-      return resolve(data)
+      const base64 = cvs.toDataURL("image/png")
+      return resolve({ data, base64 })
     }
     image.onerror = reject;
     image.src = url;

@@ -1,4 +1,4 @@
-import { ic_check, ic_close } from "assets"
+import { ic_check } from "assets"
 import { minuteAndSecond } from "helpers/time"
 import { useEffect, useState } from "react"
 import styles from "./ProgressBar.module.scss"
@@ -23,7 +23,7 @@ export const ProgressBar: React.FC<Props> = ({
   useEffect(() => {
     if (status === Status.Loading && percent < 99) {
       setTimeout(() => {
-        setPercent(percent + 1)
+        setPercent(percent + 3)
       }, 100)
     }
 

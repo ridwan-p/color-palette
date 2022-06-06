@@ -1,4 +1,4 @@
-export type Vector = number[]
+import { Vector } from "models/KmeansModel"
 
 type Calcuate = {
   onProgress?(progress: number): void,

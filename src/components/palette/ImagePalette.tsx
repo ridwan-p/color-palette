@@ -18,7 +18,7 @@ export const ImagePalette: React.FC<Props> = ({
       'row'
     )}>
       <div className="col-lg-6">
-        <img src={src} alt="preview" className="img-fluid" />
+        <img src={src} alt="preview" className="img-fluid w-100" />
       </div>
       <div className={clsx('col-lg-6', styles['image-palette-content'])}>
         <Palette
