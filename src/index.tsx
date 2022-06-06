@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { Routes } from './Routes';
 
+import '@popperjs/core';
+import 'bootstrap';
+
 import './styles/index.scss';
 
 const container = document.getElementById('root');
