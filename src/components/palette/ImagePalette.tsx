@@ -1,11 +1,11 @@
 import { Palette } from "./Palette"
 import styles from './ImagePalette.module.scss'
 import clsx from "clsx"
-import { PaletteItem } from "models/PaletteModel"
+import { VectorPalette } from "models/PaletteModel"
 
 type Props = {
   src: string,
-  colors: PaletteItem
+  colors: VectorPalette
 }
 
 export const ImagePalette: React.FC<Props> = ({
@@ -29,7 +29,7 @@ export const ImagePalette: React.FC<Props> = ({
           <div className="fw-bold">Kode CSS</div>
           <div className="mt-2">
             {
-              colors.map((item, key) => <ColorCode key={key} name="testing" color={item} />)
+              colors.map((item, key) => <ColorCode key={key} name={item.name} color={item.hex} />)
             }
           </div>
         </div>
@@ -49,7 +49,7 @@ const ColorCode: React.FC<PropsColorCode> = ({
 }) => {
   return (
     <div className={styles['color-code']}>
-      <div className={styles['color-code-comment']} style={{ display: "none" }}>{`Color Name: ${name} `}</div>
+      <div className={styles['color-code-comment']}>{`Color Name: ${name} `}</div>
       <div className={styles['color-code-css']}>
         <span>background-color : </span>
         <span className={styles['color-code-box']} style={{ backgroundColor: color }}></span>

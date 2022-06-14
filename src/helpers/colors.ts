@@ -1,3 +1,5 @@
+import { ColorModel } from "models/Colors"
+import dataColors from 'config/colors'
 /**
  * https://stackoverflow.com/questions/35969656/how-can-i-generate-the-opposite-color-according-to-current-color
  * 
@@ -36,4 +38,30 @@ export function invertColor(hex: string, bw: boolean = false) {
 function padZero(str: string, len: number = 2) {
   var zeros = new Array(len).join('0');
   return (zeros + str).slice(-len);
+}
+
+export const colorDistance = (col1: ColorModel, col2: ColorModel) => {
+  const r = col1.r - col2.r
+  const g = col1.g - col2.g
+  const b = col1.b - col2.b
+
+  return Math.pow(r, 2) + Math.pow(g, 2) + Math.pow(b, 2)
+}
+
+export const colorName = (rgb: ColorModel): string => {
+  const colors = dataColors
+  // init params 
+  let closest = colors[0]
+  let mindist = colorDistance(rgb, colors[0]);
+  // find color name 
+  for (let i = 1; i < colors.length; i++) {
+    const color2 = colors[i];
+    const dist = colorDistance(rgb, color2)
+    if (dist < mindist) {
+      mindist = dist
+      closest = color2
+    }
+
+  }
+  return closest.name || ''
 }

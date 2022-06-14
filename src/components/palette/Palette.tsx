@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import { PaletteItem } from 'models/PaletteModel'
+import { VectorPalette } from 'models/PaletteModel'
 import React from 'react'
 import { invertColor } from '../../helpers/colors'
 import styles from './Palette.module.scss'
 
 type Props = {
-  colors: PaletteItem
+  colors: VectorPalette
   className?: string
   isRounded?: boolean
 }
@@ -22,11 +22,11 @@ export const Palette: React.FC<Props> = ({
       {colors.map((item, key) => (
         <div
           key={key}
-          onClick={() => handleCopy(item)}
+          onClick={() => handleCopy(item.hex)}
           className={styles['palette-color']}
-          style={{ background: item, color: invertColor(item, true) }}
+          style={{ background: item.hex, color: invertColor(item.hex, true) }}
         >
-          <span>{item}</span>
+          <span>{item.hex}</span>
         </div>
       ))}
     </div>

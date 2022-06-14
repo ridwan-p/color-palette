@@ -5,5 +5,10 @@ export type ImageItem = {
 }
 export type ImageItems = ImageItem[]
 
-export type PaletteItem = string[]
-export type PaletteItems = PaletteItem[]
+export type PaletteColor = {
+    name: string
+    hex: string
+}
+
+export type VectorPalette = PaletteColor[]
+export type MetrixPalette = VectorPalette[]

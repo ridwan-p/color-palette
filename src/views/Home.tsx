@@ -11,15 +11,16 @@ import {
 import { convertImageRGB, loadImage, rgba2hex } from "helpers/image-generate"
 import { Kmeans } from "helpers/kmeans"
 import { Vector } from "models/KmeansModel"
-import { ImageItems, PaletteItems } from "models/PaletteModel"
+import app from "config/app"
+import { colorName } from "helpers/colors"
+import { ImageItems, VectorPalette, MetrixPalette } from "models/PaletteModel"
 
 import styles from "./Home.module.scss"
-import app from "config/app"
 
 export const Home = () => {
   const [status, setStatus] = useState(ProgressStatus.Idle)
   const [imagesSrc, setImagesSrc] = useState<ImageItems>([])
-  const [palettes, setPalettes] = useState<PaletteItems>([])
+  const [palettes, setPalettes] = useState<MetrixPalette>([])
 
   useEffect(() => {
     const dataLocal = localStorage.getItem(app.palettes)
@@ -30,9 +31,18 @@ export const Home = () => {
     }
   }, [])
 
-  const saveLocalStorage = (imagesSrc: ImageItems, palettes: PaletteItems) => {
+  const saveLocalStorage = (imagesSrc: ImageItems, palettes: MetrixPalette) => {
     const data = { imagesSrc, palettes }
     localStorage.setItem(app.palettes, JSON.stringify(data))
+  }
+
+  const getColor = (data: Vector[]): VectorPalette => {
+    return data.map((item) => {
+      const rgb = { r: item[0], g: item[1], b: item[2] }
+      const name = colorName(rgb)
+      const hex = rgba2hex(rgb)
+      return { hex, name }
+    })
   }
 
   const handleOnUpload = async (file: File) => {
@@ -40,7 +50,7 @@ export const Home = () => {
     const src = URL.createObjectURL(file)
     const { data, base64 } = await loadImage(src, 500)
     kmeansCalcuation(data).then((data: Vector[]) => {
-      const colors = data.map((item) => rgba2hex({ r: item[0], g: item[1], b: item[2] }))
+      const colors = getColor(data)
       palettes.push(colors)
       setPalettes(palettes)
       imagesSrc.push({ src: base64, filename: file.name })
@@ -58,7 +68,7 @@ export const Home = () => {
     const { data, base64 } = await loadImage(src, 500)
 
     kmeansCalcuation(data).then((data: Vector[]) => {
-      palettes[key] = data.map((item) => rgba2hex({ r: item[0], g: item[1], b: item[2] }))
+      palettes[key] = getColor(data)
       setPalettes(palettes)
 
       imagesSrc[key] = { src: base64, filename: file.name }
@@ -146,7 +156,7 @@ const EmptyValue: React.FC<PropsEmpty> = ({
 }
 
 type PropsItems = {
-  palettes: PaletteItems,
+  palettes: MetrixPalette,
   imagesSrc: ImageItems
   status: ProgressStatus
   onRemove(key: number): void
