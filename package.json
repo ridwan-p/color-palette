@@ -2,7 +2,7 @@
   "name": "color-palette",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://paletwarna.ridwanpa.com",
   "dependencies": {
     "@popperjs/core": "^2.11.5",
     "@testing-library/jest-dom": "^5.16.1",
