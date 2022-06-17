@@ -8,11 +8,11 @@ import {
   ProgressBar,
   Status as ProgressStatus
 } from "components"
-import { convertImageRGB, loadImage, rgba2hex } from "helpers/image-generate"
+import { convertImageRGB, loadImage } from "helpers/image-generate"
 import { Kmeans } from "helpers/kmeans"
 import { Vector } from "models/KmeansModel"
 import app from "config/app"
-import { colorName } from "helpers/colors"
+import { colorName, rgb2hex } from "helpers/colors"
 import { ImageItems, VectorPalette, MetrixPalette } from "models/PaletteModel"
 
 import styles from "./Home.module.scss"
@@ -40,7 +40,7 @@ export const Home = () => {
     return data.map((item) => {
       const rgb = { r: item[0], g: item[1], b: item[2] }
       const name = colorName(rgb)
-      const hex = rgba2hex(rgb)
+      const hex = rgb2hex(rgb)
       return { hex, name }
     })
   }

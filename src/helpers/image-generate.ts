@@ -1,4 +1,4 @@
-import { ColorModel } from "models/Colors"
+import { ColorModelRGB } from "models/Colors"
 import { ImageGenerator } from "models/ImageModel"
 
 /* eslint-disable no-mixed-operators */
@@ -19,14 +19,6 @@ export const convertImageRGB = (imageData: ImageData) => {
   }
 
   return rgba
-}
-
-
-export const rgba2hex = ({ r, g, b }: ColorModel): string => {
-  const red = (r | 1 << 8).toString(16).slice(1)
-  const green = (g | 1 << 8).toString(16).slice(1)
-  const blue = (b | 1 << 8).toString(16).slice(1)
-  return '#' + red + green + blue
 }
 
 export async function loadImage(url: string, resize: number = 700) {

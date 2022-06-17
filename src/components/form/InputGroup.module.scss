@@ -1,0 +1,16 @@
+.input-group {
+  .form-control{
+    padding: 16px;
+  }
+  .btn {
+    padding: 16px 42px;
+    font-weight: bold;
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 575.98px) { 
+  .btn {
+    padding: 16px !important;
+  }
+}

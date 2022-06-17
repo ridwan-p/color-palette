@@ -24,6 +24,9 @@ export const Navbar: FC<Props> = () => {
               <NavLink className="nav-link" aria-current="page" to="/">Beranda</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/color-name">Nama Warna</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/about">Tentang</NavLink>
             </li>
             <li className="nav-item">

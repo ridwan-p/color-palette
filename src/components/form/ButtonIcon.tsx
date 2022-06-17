@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import React from "react"
-import sytles from "./ButtonIcon.module.scss"
+import styles from "./ButtonIcon.module.scss"
 
 type Props = {
     className?: string
@@ -20,7 +20,7 @@ export const ButtonIcon: React.FC<Props> = ({
     return (
         <button
             className={clsx(
-                sytles['btn-icon'],
+                styles['btn-icon'],
                 'btn',
                 className,
             )}
@@ -28,7 +28,7 @@ export const ButtonIcon: React.FC<Props> = ({
             style={style}
         >
             {!!iconPre && <img src={iconPre} className="btn-icon-img" alt="icon button" width={32} height={32} />}
-            <div className={sytles['btn-icon-content']}>{children}</div>
+            <div className={styles['btn-icon-content']}>{children}</div>
         </button>
     )
 }
