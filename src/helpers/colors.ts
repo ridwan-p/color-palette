@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import { ColorModelHSL, ColorModelHSV, ColorModelRGB } from "models/Colors"
 import dataColors from 'config/colors'
 /**
