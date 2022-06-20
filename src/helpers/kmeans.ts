@@ -83,26 +83,15 @@ export class Kmeans {
       })
     })
 
-    // let distance = 0
-    // let max = 0
     vecArr = vecArr.map((x, i) => {
       const clusterSize = newCluster[i] ? newCluster[i].length : 0
-      // konsep mikir sendiri gak ada referensi
-      // if (clusterSize) return new Array(x.length).fill(0)
 
       // referensi https://www.baeldung.com/java-k-means-clustering-algorithm
-      // ketika data kosong dikembalikan data centroids
+      // when cluster size is empty , return centroid
       if (!clusterSize) return x
-      // distance = this.distance(vecArr[i], this.centroids[i])
-      // if (distance > max)
-      //   max = distance
-
       return x.map(y => Math.floor(y / clusterSize))
     })
 
-    // if (max <= 0.5) {
-    //   return vecArr
-    // }
     if (this.isEqual(this.cluster, newCluster)) {
       this.progress = 100
       return new Promise((resolve) => {
