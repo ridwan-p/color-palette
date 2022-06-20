@@ -52,12 +52,10 @@ export const Home = () => {
     kmeansCalcuation(data).then((data: Vector[]) => {
       const colors = getColor(data)
       palettes.push(colors)
-      setPalettes(palettes)
       imagesSrc.push({ src: base64, filename: file.name })
-      setImagesSrc(imagesSrc)
+
+      storeDataImage(palettes, imagesSrc)
       setStatus(ProgressStatus.Finish)
-      // save to localStorage
-      saveLocalStorage(imagesSrc, palettes)
     })
 
   }
@@ -69,31 +67,31 @@ export const Home = () => {
 
     kmeansCalcuation(data).then((data: Vector[]) => {
       palettes[key] = getColor(data)
-      setPalettes(palettes)
-
       imagesSrc[key] = { src: base64, filename: file.name }
-      setImagesSrc(imagesSrc)
 
+      storeDataImage(palettes, imagesSrc)
       setStatus(ProgressStatus.Finish)
-      // save to localStorage
-      saveLocalStorage(imagesSrc, palettes)
     })
   }
 
   const handleRemove = (key: number) => {
     imagesSrc.splice(key, 1)
     palettes.splice(key, 1)
-    setPalettes([...palettes])
-    setImagesSrc([...imagesSrc])
-
-    // save to localStorage
-    saveLocalStorage(imagesSrc, palettes)
+    storeDataImage([...palettes], [...imagesSrc])
   }
 
   const handleOnFinishProcess = () => {
     setTimeout(() => {
       setStatus(ProgressStatus.Idle)
     }, 1200)
+  }
+
+  const storeDataImage = (palettes: MetrixPalette, imagesSrc: ImageItems) => {
+    setPalettes(palettes)
+    setImagesSrc(imagesSrc)
+
+    // save to localStorage
+    saveLocalStorage(imagesSrc, palettes)
   }
 
   const kmeansCalcuation = async (src: ImageData): Promise<Vector[]> => {
