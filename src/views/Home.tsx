@@ -63,7 +63,7 @@ export const Home = () => {
   const handleChange = async (key: number, file: File) => {
     setStatus(ProgressStatus.Loading)
     const src = URL.createObjectURL(file)
-    const { data, base64 } = await loadImage(src, 500)
+    const { data, base64 } = await loadImage(src, 900)
 
     kmeansCalcuation(data).then((data: Vector[]) => {
       palettes[key] = getColor(data)

@@ -1,4 +1,5 @@
 import { Vector } from "models/KmeansModel"
+import { DaviesBouldinIndex } from "./davies-bouldin-index"
 
 type Calcuate = {
   onProgress?(progress: number): void,
@@ -76,6 +77,7 @@ export class Kmeans {
 
     this.vector.forEach((v, i) => {
       const res = this.assignCentroid(v)
+      // save index cluster 
       newCluster[res].push(i)
 
       v.forEach((a, j) => {
@@ -94,6 +96,11 @@ export class Kmeans {
 
     if (this.isEqual(this.cluster, newCluster)) {
       this.progress = 100
+      // console.info('Data', this.vector);
+      // console.info('cluster', newCluster);
+      console.info('centroid', vecArr);
+      const evaluation = new DaviesBouldinIndex(this.vector, newCluster, this.centroids)
+      evaluation.calculate()
       return new Promise((resolve) => {
         resolve(vecArr)
       })

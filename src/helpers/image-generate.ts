@@ -1,4 +1,3 @@
-import { ColorModelRGB } from "models/Colors"
 import { ImageGenerator } from "models/ImageModel"
 
 /* eslint-disable no-mixed-operators */
@@ -30,6 +29,7 @@ export async function loadImage(url: string, resize: number = 700) {
       const scala = image.width > resize ? resize / image.width : 1
       cvs.width = image.width * scala
       cvs.height = image.height * scala
+      console.log(`image size ${image.width} * ${image.height}`)
       ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, cvs.width, cvs.height)
       const data = ctx.getImageData(0, 0, cvs.width, cvs.height)
       const base64 = cvs.toDataURL("image/png")
